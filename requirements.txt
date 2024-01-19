@@ -1,0 +1,11 @@
+transformers
+pandas
+numpy
+nltk
+tqdm
+PyYAML
+matplotlib
+notebook
+fastapi==0.108.0
+uvicorn==0.18.3
+-e .
