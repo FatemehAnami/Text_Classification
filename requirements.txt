@@ -1,18 +1,21 @@
 transformers
+datasets
+sacrebleu 
+rouge_score 
+py7zr
 pandas
-numpy
 nltk
 tqdm
 PyYAML
 matplotlib
+scikit-learn
 notebook
-fastapi==0.108.0
-uvicorn==0.18.
+fastapi
+uvicorn
 python-box==6.0.2
 ensure==1.0.2
 pathlib
 typing
 scipy
 torch
-tensorflow
 -e .
