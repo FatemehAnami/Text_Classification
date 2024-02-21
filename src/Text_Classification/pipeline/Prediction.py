@@ -8,7 +8,7 @@ class PredictionPipeline:
     def __init__(self) -> None:
         self.config = ConfigurationManager().get_model_evaluation_config()
 
-    def prediction(self, text):
+    def predict(self, text):
         tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
         gen_kwargs = {"max_length" : 256}
         
@@ -17,4 +17,4 @@ class PredictionPipeline:
                        tokenizer = tokenizer)
 
         output = pipe(text, **gen_kwargs)[0]['label']
-        return output
+        return output.capitalize()
