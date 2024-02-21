@@ -18,4 +18,31 @@ class DataValidationConfig:
 class DataTransformationConfig:
     root_dir: Path
     data_path: Path
-    tokenizer_name: Path    
+    tokenizer_name: Path  
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    data_path: Path
+    model_ckpt: Path
+    log_dir : Path
+    num_train_epochs: int
+    per_device_train_batch_size :  int
+    per_device_eval_batch_size : int
+    warmup_steps : int
+    weight_decay : float
+    logging_steps : int
+    evaluation_strategy : str
+    eval_steps : int
+    load_best_model_at_end : bool
+    save_steps : int
+    seed : int
+    num_labels : int  
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    data_path: Path
+    model_path: Path
+    tokenizer_path: Path
+    metrics_file_name: Path

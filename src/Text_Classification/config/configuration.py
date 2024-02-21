@@ -2,7 +2,9 @@ from Text_Classification.constants import *
 from Text_Classification.utils.common import read_yaml, create_directories
 from Text_Classification.entity import (DataIngestionConfig, 
                                         DataValidationConfig,
-                                        DataTransformationConfig)
+                                        DataTransformationConfig,
+                                        ModelTrainerConfig,
+                                        ModelEvaluationConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -53,3 +55,45 @@ class ConfigurationManager:
         )    
         
         return data_transformation_config
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+        params = self.params.TrainingArguments
+        
+        create_directories([config.root_dir])
+        
+        model_trainer_config = ModelTrainerConfig(
+            root_dir = config.root_dir,
+            data_path = config.data_path,
+            model_ckpt = config.model_ckpt,
+            log_dir= config.log_dir,
+            num_train_epochs = params.num_train_epochs,
+            per_device_train_batch_size = params.per_device_train_batch_size,
+            per_device_eval_batch_size = params.per_device_eval_batch_size,
+            warmup_steps  = params.warmup_steps,
+            weight_decay = params.weight_decay,
+            logging_steps = params.logging_steps,
+            evaluation_strategy = params.evaluation_strategy,
+            eval_steps = params.eval_steps,
+            load_best_model_at_end = params.load_best_model_at_end,
+            save_steps = params.save_steps,
+            seed = params.seed,
+            num_labels= params.num_labels
+        )    
+        
+        return model_trainer_config
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        
+        create_directories([config.root_dir])
+        
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir = config.root_dir,
+            data_path  = config.data_path,
+            model_path = config.model_path,
+            tokenizer_path = config.tokenizer_path,
+            metrics_file_name = config.metrics_file_name
+        )    
+    
+        return model_evaluation_config
